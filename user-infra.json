@@ -1,0 +1,79 @@
+{
+	"name": "user-microinfra",
+	"namespace": "user",
+	"storageAdaptorContainers": [
+			{
+			"name": "slurm",
+			"type": "sshfs",
+			"expose": "webdav",
+			"user": "xenon",
+			"password":"javagat",
+			"host": "slurm.process-slurm",
+			"path": "/home/xenon/"
+		},
+	
+		{
+			"name": "dtn",
+			"type": "sshfs",
+			"expose": "webdav",
+			"user": "user",
+			"password":"pigandthefiddle",
+			"host": "dtn.process-dtn",
+			"path": "/home/user/"
+		}
+		],
+	"initContainers": [],
+	"logicContainers": [
+			{
+			"name": "jupyter",
+			"type": "generic",
+			"image": "microinfrastructure/scipy-notebook",
+			"env":[
+				{ "name": "JPASSWD", "value": "Yy5Ob3RlYm9va0FwcC5wYXNzd29yZCA9IHUnc2hhMTpkYjkyZWM5ZTcxOTk6YjczZjMzZTlkYjhkYzAyYTdhM2MzNjMzODExNzRlZWUwNDUxZjViZSc=" }
+				],
+			"config": {
+				"mountStorageAdaptors": true,
+				"dataPath": "/data"
+			},
+			"mountHost": [
+			],
+			"port":8888,
+			"service":{
+				"enabled": true
+			},
+			"cmd":["echo $JPASSWD | base64 -d >> /home/jovyan/.jupyter/jupyter_notebook_config.py && cd /data && jupyter lab --allow-root"]
+		},
+		{
+			"name": "redis",
+			"type": "redis"
+		},
+		{
+			"name": "proxy",
+			"type": "proxy"
+		},
+		{
+			"name": "scp",
+			"type": "scp",
+			"service": {
+				"enabled": true
+			},
+			"env": [{
+				"name": "NETWORK",
+				"value": "e30="
+			}]
+		},
+		{
+			"name": "webdav",
+			"type": "webdav",
+			"config":{
+				"user": "process",
+				"pass": "thesame.",
+				"mountStorageAdaptors": true
+			},
+			"service":{
+				"enabled": true
+			}
+		}
+	]
+}
+
