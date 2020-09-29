@@ -38,6 +38,11 @@ Mini-process combines several services from PROCESS into one VM. These include L
 
 `make clean`
 
+## Bigger VM
+If you have a more powerful machine you can edit the Vagrantfile and increase the VM memory and cores
+`v.memory = 8192`
+`v.cpus = 8`
+
 ## LOBCDER Copy
 The x-access-token for accessing the LOBCDER copy REST API is found in mini-process/mini-lobcder/k8s-setup/userServiceToken.json after a successful installation.
 
