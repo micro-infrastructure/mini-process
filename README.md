@@ -17,17 +17,17 @@ Mini-process combines several services from PROCESS into one VM. These include L
 `make build`
 - This will take a while....
 - Once up the 3 default services can be accessed from your local browser.
-external: http://192.168.50.10:31003 internal: http://user-microinfra-scp.user:8888 for Jupyter
-http://192.168.50.10:31002 internal http://user-microinfra-scp.user:9002 for LOBCDER copy
-http://192.168.50.10:31001 internal http://user-microinfra-scp.user:9001 for webdav
+	+ external: http://192.168.50.10:31003 internal: http://user-microinfra-scp.user:8888 for Jupyter
+	+ external: http://192.168.50.10:31002 internal http://user-microinfra-scp.user:9002 for LOBCDER copy
+	+ external: http://192.168.50.10:31001 internal http://user-microinfra-scp.user:9001 for webdav
 
 - The slurm node is accessible through ssh on
-external: 192.168.50.10 port 31022 internal: slurm.process-slurm port 22
-user xenon
-pass javagat
++ external: 192.168.50.10 port 31022 internal: slurm.process-slurm port 22
+	user xenon
+	pass javagat
 
 - The process core-infra service is accessible:
-external: http://192.168.50.10:30000 internal http://core-infra.process-core:4200
+	+ external: http://192.168.50.10:30000 internal http://core-infra.process-core:4200
 
 - You can suspend and resume the VM using
 
